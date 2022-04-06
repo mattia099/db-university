@@ -1,0 +1,41 @@
+1.
+SELECT `students`.*, `degrees`.`name`
+FROM `students`
+INNER JOIN `degrees` ON `degree_id` = `degrees`.`id`
+WHERE `degrees`.`name` = "Corso di Laurea in Economia"
+
+2.
+SELECT `degrees`.*, `departments`.`name` as nome_dipartimento
+FROM `departments`
+INNER JOIN `degrees` ON `department_id` = `departments`.`id`
+WHERE `departments`.`name` = "Dipartimento di Neuroscienze"
+
+3.
+SELECT `teachers`.*, `courses`.`name` as nome_corso 
+FROM `teachers`
+INNER JOIN `course_teacher` ON `teacher_id`= `teachers`.`id`
+INNER JOIN `courses` ON  `course_teacher`.`course_id` = `courses`.`id`
+WHERE `teachers`.`name` = "Fulvio" AND `teachers`.`surname`="Amato"
+
+4.
+SELECT * 
+FROM `students`
+INNER JOIN `degrees`ON `degrees`.`id`=`degree_id`
+INNER JOIN `departments` ON `departments`.`id`=`department_id`
+ORDER BY `students`.`surname` ASC, `students`.`name` ASC
+
+5.
+SELECT * 
+FROM `courses`
+INNER JOIN `course_teacher` ON `courses`.`id`=`course_id`
+INNER JOIN `teachers` ON `course_teacher`.`teacher_id`=`teachers`.`id`
+
+6.
+SELECT `departments`.`name`, `teachers`.`name`,`teachers`.`surname`
+FROM `departments`
+INNER JOIN `degrees` ON `degrees`.`department_id` = `departments`.`id`
+INNER JOIN `courses` ON `degrees`.`id`=`courses`.`degree_id`
+INNER JOIN `course_teacher` ON `courses`.`id` = `course_id`
+INNER JOIN `teachers` ON `teachers`.`id` = `course_teacher`.`teacher_id`
+WHERE `departments`.`name` = "Dipartimento di Matematica"
+GROUP BY `teachers`.`id`
